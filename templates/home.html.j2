@@ -1,0 +1,38 @@
+{% extends 'layout.html.j2' %}
+
+{% block titre %}
+    Accueil
+{% endblock %}
+
+{% block body %}
+
+<div class="mt-5 mb-5">
+    <h1 class="text-center">Bonjour  {{ user[1] }}</h1>
+    <p class="text-center">Que souhaitez-vous faire ? </p>
+</div>
+
+<div class="d-flex justify-content-around text-center">
+    <a href="{{url_for('open') }}" class="card col-sm-4 pl-0 pr-0 text-success">
+        <div class="card-body">
+            <i class="material-icons icon-big">
+                lock_open
+            </i>
+        </div>
+        <div class="card-footer">
+            Ouvrir ma porte
+        </div>
+    </a>
+
+    <a href="{{url_for('logs') }}" class="card col-sm-4 pl-0 pr-0 text-primary">
+        <div class="card-body">
+            <i class="material-icons icon-big">
+                history
+            </i>
+        </div>
+        <div class="card-footer">
+            Récupérer l'historique des ouvertures
+        </div>
+    </a>
+</div>
+
+{% endblock %}

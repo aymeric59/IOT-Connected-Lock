@@ -1,0 +1,93 @@
+{% extends 'layout.html.j2' %}
+
+{% block titre %}
+    Administration
+{% endblock %}
+
+{% block body %}
+
+<h1 class="mt-5 mb-5 text-center">Administrez votre serrure connectée</h1>
+
+<div class="d-flex justify-content-around text-center">
+    <a href="{{url_for('open') }}" class="card col-sm-2 pl-0 pr-0 text-success">
+        <div class="card-body">
+            <i class="material-icons icon-big">
+                lock_open
+            </i>
+        </div>
+        <div class="card-footer">
+            Ouvrir ma porte
+        </div>
+    </a>
+    <a href="{{url_for('logs') }}" class="card col-sm-2 pl-0 pr-0 text-primary">
+        <div class="card-body">
+            <i class="material-icons icon-big">
+                history
+            </i>
+        </div>
+        <div class="card-footer">
+            Récupérer l'historique des ouvertures
+        </div>
+    </a>
+    <a href="{{url_for('add_user')}}" class="card col-sm-2 pl-0 pr-0 text-secondary">
+        <div class="card-body">
+            <i class="material-icons icon-big">
+                account_circle
+            </i>
+        </div>
+        <div class="card-footer">
+            Ajouter un utlisateur
+        </div>
+    </a>
+    <a href="{{url_for('add_badge')}}" class="card col-sm-2 pl-0 pr-0 text-info">
+        <div class="card-body">
+            <i class="material-icons icon-big">
+                vpn_key
+            </i>
+        </div>
+        <div class="card-footer">
+            Ajouter un badge
+        </div>
+    </a>
+</div>
+
+<div class="col-sm-10 offset-sm-1 mt-5">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Admin</th>
+                <th scope="col">Modifier utilisateur</th>
+                <th scope="col">Supprimer utilisateur</th>
+                <th scope="col">Badge associé</th>
+                <th scope="col">Supprimer badge</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for eachUser in users %}
+            <tr>
+                <td>{% if eachUser.1 != None %}{{ eachUser.1 }}{% else %}-{% endif %}</td>
+                <td>{% if eachUser.2 == 1 %}Oui{% else %}-{% endif %}</td>
+                <td>
+                    {% if eachUser.1 != None %}
+                        <a href="{{ url_for('edit_user', id = eachUser.0 | int) }}" class="text-primary"><i class="material-icons">edit</i></a>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if eachUser.1 != None %}
+                        <a href="{{ url_for('delete_user', id = eachUser.0 | int) }}" class="delete text-danger"><i class="material-icons">delete</i></a>
+                    {% endif %}
+                </td>
+                <td>{% if eachUser.4 != None %}{{ eachUser.4 }}{% else %}-{% endif %}</td>
+                <td>
+                    {% if eachUser.4 != None %}
+                        <a href="{{ url_for('delete_badge', id = eachUser.3 | int) }}" class="delete text-danger"><i class="material-icons">delete</i></a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

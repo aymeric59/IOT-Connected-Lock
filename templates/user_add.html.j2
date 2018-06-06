@@ -1,0 +1,41 @@
+{% extends 'layout.html.j2' %}
+
+{% block titre %}
+    Ajouter un utilisateur
+{% endblock %}
+
+{% block body %}
+
+<h1 class="text-center mt-5 mb-5">Ajouter un utilisateur</h1>
+
+<div class="jumbotron col-sm-6 offset-sm-3">
+    <form action="" method="POST">
+        <div class="form-group">
+            <label for="username">Nom d'utilisateur</label>
+            <input type="text" class="form-control" name="username" placeholder="ex: Toto" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" class="form-control" name="password" required>
+        </div>
+        <div class="form-group">
+            <label for="badges">Associer un badge</label>
+            <select class="form-control" name="badges">
+                    <option value=""></option>
+                {% for badge in badges %}
+                    <option value="{{ badge.0 }}">{{ badge.1 }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" name="isAdmin">
+            <label class="form-check-label" for="isAdmin" id="isAdmin">Administrateur</label>
+        </div>
+        <div class="float-right">
+            <button type="submit" class="btn btn-success">Ajouter</button>
+            <a href="{{ url_for('admin') }}" class="btn btn-danger">Annuler</a>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

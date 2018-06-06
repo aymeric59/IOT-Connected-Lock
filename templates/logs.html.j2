@@ -1,0 +1,48 @@
+{% extends 'layout.html.j2' %}
+
+{% block titre %}
+    Logs
+{% endblock %}
+
+{% block body %}
+
+<h1 class="text-center mt-5 mb-5">Historique des ouvertures</h1>
+
+<div class="col-sm-10 offset-sm-1 mt-5">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Utilisateur</th>
+                <th scope="col">Date</th>
+                <th scope="col">Badge uid</th>
+                <th scope="col">Statut</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entrie in entries %}
+            <tr>
+                <td>{{ entrie.0 }}</td>
+                <td>
+                    {% if entrie.4 != None %}
+                        {{ entrie.4 }}
+                    {% else %}
+                        Badge non associé
+                    {% endif %}
+                </td>
+                <td>{{ entrie.1 }}</td>
+                <td>{{ entrie.2 }}</td>
+                <td>
+                    {% if entrie.3 == 1 %}
+                        <i class="material-icons text-success">lock_open</i>
+                    {% else %}
+                        <i class="material-icons text-danger">lock</i>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
